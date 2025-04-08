@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bloomify | Flower Shop</title>
+  <link rel="stylesheet" href="style/index.css" />
+
+</head>
+<body>
+
+  <header>
+    <h1>🌸 Bloomify</h1>
+    <nav>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="custom-bouquets.html">Custom Bouquets</a></li>
+        <li><a href="simple-bouquets.html">Simple Bouquets</a></li>
+        <li><a href="cart.html">Cart</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <div class="hero-text">
+      <h2>Send Love, Send Flowers</h2>
+      <p>Fresh bouquets for every occasion. Customizable, creative, and crafted with care.</p>
+      <a href="#" class="btn">Shop Now</a>
+    </div>
+    <img src="assets/hero-flowers.png" alt="Flowers" class="hero-img" />
+  </section>
+
+  <section class="features">
+    <div class="feature-card">
+      <img src="assets/simple.png" alt="Simple Bouquets" />
+      <h3>Simple Bouquets</h3>
+      <p>Elegant pre-designed flower sets for instant gifting.</p>
+    </div>
+    <div class="feature-card">
+      <img src="assets/custom.png" alt="Custom Bouquets" />
+      <h3>Customized Bouquets</h3>
+      <p>Mix in chocolates, toys, or even cash! Your style, your bouquet.</p>
+    </div>
+   
+  </section>
+
+  <div id="chatbot-placeholder"></div>
+
+  <script src="scripts/index.js">
+    fetch("chatbot.html")
+      .then(res => res.text())
+      .then(html => {
+        document.getElementById("chatbot-placeholder").innerHTML = html;
+      });
+  </script>
+
+
+</body>
+</html>

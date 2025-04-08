@@ -26,6 +26,16 @@
       <button onclick="placeOrder()">Place Order</button>
     </div>
   </section>
+  <div id="chatbot-placeholder">
+
+    <script src="scripts/contact.js">
+      fetch("chatbot.html")
+        .then(res => res.text())
+        .then(html => {
+          document.getElementById("chatbot-placeholder").innerHTML = html;
+        });
+    </script>
+    </div>
 
   <script src="scripts/cart.js"></script>
 </body>

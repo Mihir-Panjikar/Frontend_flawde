@@ -1,40 +1,119 @@
 const bouquets = [
     {
-      name: "Romantic Red Roses",
+      name: "Romantic Red Roses Bouquet",
       description: "12 fresh red roses wrapped in love.",
       price: 499,
-      image: "assets/rose.jpg"
+      image: "assets/Red Rose bouquet.jpg"
     },
     {
-      name: "Sunny Sunflowers",
-      description: "Bright sunflowers to light up someone’s day.",
+      name: "Pink Rose Bouquet",
+      description: "Fresh Pink roses wrapped in love.",
       price: 599,
-      image: "assets/sunflower.jpg"
+      image: "assets/pink rose bouquet.jpg"
     },
     {
-      name: "Mixed Bloom Beauty",
-      description: "Colorful mix of roses, lilies, and orchids.",
+      name: "White Rose Bouquet",
+      description: "Fresh White roses wrapped in love.",
       price: 699,
-      image: "assets/mixed.jpg"
+      image: "assets/White Rose Bouquet.jpg"
     },
     {
-      name: "Elegant White Lilies",
-      description: "Sleek white lilies tied with lavender ribbon.",
+      name: "Tulip Bouquet",
+      description: "Elegant tulip bouquet bursting with color and charm.",
       price: 799,
-      image: "assets/lilies.jpg"
+      image: "assets/Tulip Bouquet.jpg"
     },
     {
-      name: "Teddy & Roses Combo",
-      description: "Roses with a cute teddy for extra love.",
+      name: "Black Rose Bouquet",
+      description: "Fresh Black roses wrapped in love.",
       price: 899,
-      image: "assets/teddy.jpg"
+      image: "assets/Black Rose Bouquet.jpeg"
     },
     {
-      name: "Chocolate Delight",
-      description: "Bouquet paired with Ferrero Rocher chocolates.",
+      name: "Lavender Bouquet",
+      description: "Fresh Lavenders wrapped in love.",
+      price: 699,
+      image: "assets/Lavender Bouquet.jpg"
+    },
+    {
+      name: "Lily Bouquet",
+      description: "Graceful lily bouquet radiating purity , elegance, and fragrance.",
+      price: 799,
+      image: "assets/Lily Bouquet.jpg"
+    },
+    {
+    name: "Mixed Bouquet",
+    description: "A bouquet with elegent flowers",
+    price: 599,
+    image: "assets/Mixed Bouquet.jpg"
+    },
+    {
+      name: "Sunflower Bouquet",
+      description: "Vibrant sunflower bouquet shining with warmth and happiness.",
+      price: 899,
+      image: "assets/Sunflower Bouquet.jpg"
+    },
+    {
+        name: "White Daisy Bouquet",
+        description: "Vibrant White Daisy bouquet shining with purity and elegance.",
+        price: 799,
+        image: "assets/White Daisy Bouquet.jpg"
+    },
+   
+    {
+      name: "Box Bouquet",
+      description: "",
       price: 999,
-      image: "assets/choco.jpg"
-    }
+      image: "assets/Box Bouquet.jpg"
+    },
+    {
+      name: "Chocolate Bouquet",
+      description: "",
+      price: 899,
+      image: "assets/Chocolate Bouquet.jpg"
+    },
+    {
+      name: "Ferrero rocher Bouquet",
+      description: "",
+      price: 999,
+      image: "assets/Ferrero rocher Bouquet.jpg"
+    },
+    {
+      name: "Heart shaped Bouquet",
+      description: "",
+      price: 1299,
+      image: "assets/Heart shaped Bouquet.jpg"
+    },
+    {
+      name: "Hot wheels Bouquet",
+      description: "",
+      price: 1399,
+      image: "assets/Hot wheels Bouquet.jpg"
+    },
+    {
+      name: "Money Bouquet",
+      description: "",
+      price: 899,
+      image: "assets/Money Bouquet.jpg"
+    },
+    {
+      name: "Personlized Bouquet",
+      description: "",
+      price: 1299,
+      image: "assets/Personalized Bouquet.jpg"
+    },
+    {
+      name: "Ribbon Bouquet",
+      description: "",
+      price: 899,
+      image: "assets/Ribbion bouquet.jpg"
+    },
+    {
+      name: "Toy Bouquet",
+      description: "",
+      price: 999,
+      image: "assets/Toy bouquet.jpg"
+    },
   ];
   
   const bouquetGrid = document.getElementById("bouquetGrid");

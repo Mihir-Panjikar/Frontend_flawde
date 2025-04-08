@@ -9,13 +9,13 @@
 <body>
 
   <header>
-    <h1>🌸 Bloomify</h1>
+    <h1>🌸 Floral Couture</h1>
     <nav>
       <ul>
         <li><a href="index.html">Home</a></li>
-        <li><a href="#">Simple Bouquets</a></li>
-        <li><a href="#">Custom Bouquets</a></li>
-        <li><a href="#">Cart</a></li>
+        <li><a href="simple-bouquets.html">Simple Bouquets</a></li>
+        <li><a href="custom-bouquets.html">Custom Bouquets</a></li>
+        <li><a href="cart.html">Cart</a></li>
         <li><a href="contact.html" class="active">Contact</a></li>
       </ul>
     </nav>
@@ -33,7 +33,7 @@
     </form>
   </section>
 
-  <div id="chatbot-placeholder"></div>
+  <div id="chatbot-placeholder">
 
   <script src="scripts/contact.js">
     fetch("chatbot.html")
@@ -42,6 +42,7 @@
         document.getElementById("chatbot-placeholder").innerHTML = html;
       });
   </script>
+  </div>
 
 </body>
 </html>

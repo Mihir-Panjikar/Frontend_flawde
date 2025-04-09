@@ -76,7 +76,7 @@ const bouquets = [
       name: "Ferrero rocher Bouquet",
       description: "",
       price: 999,
-      image: "assets/Ferrero rocher Bouquet.jpg"
+      image: "assets/Ferrero rocher Bouquet.webp"
     },
     {
       name: "Heart shaped Bouquet",

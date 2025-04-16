@@ -7,48 +7,124 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Simple Bouquets - Floral Couture</title>
   <link rel="stylesheet" href="{% static 'style/styles.css' %}">
+   <link rel="stylesheet" href="{% static 'style/navbar.css' %}">
+  <link rel="stylesheet" href="{% static 'style/product-grid.css' %}">
 </head>
 
 <body>
-
   <nav class="navbar">
-    <h1>🌼 Floral Couture</h1>
+    <div class="navbar-logo">
+      <h1 data-icon="🌼">Floral Couture</h1>
+    </div>
+    <div class="navbar-toggle">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
     <ul>
       <li><a href="{% url 'index' %}">Home</a></li>
-      <li><a href="{% url 'simple_bouquets' %}">Bouquets</a></li>
+      <li><a class="active" href="{% url 'simple_bouquets' %}">Bouquets</a></li>
       <li><a href="{% url 'custom_bouquets' %}">Customise</a></li>
       <li><a href="{% url 'cart' %}">Cart</a></li>
       <li><a href="{% url 'contact' %}">Contact</a></li>
     </ul>
   </nav>
 
-  <section class="product-grid">
-    <div class="product-card">
-      <img src="{% static 'assets/Black_Rose_Bouquet.jpeg' %}" alt="Black Roses">
-      <h3>Black Rose Bouquet</h3>
-      <p>Elegant arrangement of specially dyed roses.</p>
-      <p class="price">₹999</p>
-      <button class="add-to-cart" data-id="1" data-name="Black Rose Bouquet" data-price="999">Add to Cart</button>
-    </div>
+  <div class="page-content">
+    <header class="page-header">
+      <h2>Beautiful Bouquets</h2>
+      <p class="subtitle">Handcrafted arrangements for every occasion</p>
+    </header>
 
-    <div class="product-card">
-      <img src="{% static 'assets/Red_Rose_Bouquet.jpg' %}" alt="Red Roses">
-      <h3>Red Rose Bouquet</h3>
-      <p>Classic arrangement of fresh red roses.</p>
-      <p class="price">₹799</p>
-      <button class="add-to-cart" data-id="2" data-name="Red Rose Bouquet" data-price="799">Add to Cart</button>
-    </div>
+    <section class="product-grid">
+      <div class="product-card">
+        <div class="product-image-container">
+          <img src="{% static 'assets/Black_Rose_Bouquet.jpeg' %}" alt="Black Roses">
+          <div class="product-badge">Popular</div>
+        </div>
+        <div class="product-info">
+          <h3>Black Rose Bouquet</h3>
+          <p class="product-description">Elegant arrangement of specially dyed roses.</p>
+          <div class="product-price-container">
+            <p class="price">₹999</p>
+          </div>
+          <button class="add-to-cart" data-id="1" data-name="Black Rose Bouquet" data-price="999">
+            <span class="btn-icon">+</span>
+            <span class="btn-text">Add to Cart</span>
+          </button>
+        </div>
+      </div>
 
-    <div class="product-card">
-      <img src="{% static 'assets/White_Lily_Bouquet.jpg' %}" alt="White Lilies">
-      <h3>White Lily Bouquet</h3>
-      <p>Pure white lilies symbolizing peace and elegance.</p>
-      <p class="price">₹899</p>
-      <button class="add-to-cart" data-id="3" data-name="White Lily Bouquet" data-price="899">Add to Cart</button>
-    </div>
-  </section>
+      <div class="product-card">
+        <div class="product-image-container">
+          <img src="{% static 'assets/Red_Rose_bouquet.jpg' %}" alt="Red Roses">
+          <div class="product-badge bestseller">Bestseller</div>
+        </div>
+        <div class="product-info">
+          <h3>Red Rose Bouquet</h3>
+          <p class="product-description">Classic arrangement of fresh red roses.</p>
+          <div class="product-price-container">
+            <p class="price">₹799</p>
+          </div>
+          <button class="add-to-cart" data-id="2" data-name="Red Rose Bouquet" data-price="799">
+            <span class="btn-icon">+</span>
+            <span class="btn-text">Add to Cart</span>
+          </button>
+        </div>
+      </div>
+
+      <div class="product-card">
+        <div class="product-image-container">
+          <img src="{% static 'assets/White_Lily_bouquet.jpg' %}" alt="White Lilies">
+        </div>
+        <div class="product-info">
+          <h3>White Lily Bouquet</h3>
+          <p class="product-description">Pure white lilies symbolizing peace and elegance.</p>
+          <div class="product-price-container">
+            <p class="price">₹899</p>
+          </div>
+          <button class="add-to-cart" data-id="3" data-name="White Lily Bouquet" data-price="899">
+            <span class="btn-icon">+</span>
+            <span class="btn-text">Add to Cart</span>
+          </button>
+        </div>
+      </div>
+    </section>
+  </div>
 
   <script src="{% static 'scripts/simple.js' %}"></script>
+  <script>
+    // Mobile navigation toggle
+    document.addEventListener('DOMContentLoaded', function () {
+      const navbarToggle = document.querySelector('.navbar-toggle');
+      const navbar = document.querySelector('.navbar');
+      const navMenu = document.querySelector('.navbar ul');
+
+      navbarToggle.addEventListener('click', function () {
+        navMenu.classList.toggle('open');
+        navbar.classList.toggle('menu-open');
+      });
+
+      // Navbar scroll effect
+      window.addEventListener('scroll', function () {
+        if (window.scrollY > 50) {
+          navbar.classList.add('scrolled');
+        } else {
+          navbar.classList.remove('scrolled');
+        }
+      });
+
+      // Add animation to "Add to Cart" buttons
+      document.querySelectorAll('.add-to-cart').forEach(button => {
+        button.addEventListener('click', function () {
+          this.classList.add('added');
+          setTimeout(() => {
+            this.classList.remove('added');
+          }, 1500);
+        });
+      });
+    });
+  </script>
 </body>
 
 </html>

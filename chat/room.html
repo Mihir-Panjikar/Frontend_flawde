@@ -1,0 +1,61 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FlowerBot - Floral Couture</title>
+    <link rel="stylesheet" href="{% static 'style/chat.css' %}">
+</head>
+
+<body>
+    <nav class="navbar">
+        <h1>🌸 FlowerBot Assistant</h1>
+        <ul>
+            <li><a href="{% url 'index' %}">Home</a></li>
+            <li><a href="{% url 'simple_bouquets' %}">Bouquets</a></li>
+            <li><a href="{% url 'custom_bouquets' %}">Customise</a></li>
+            <li><a href="{% url 'contact' %}">Contact</a></li>
+        </ul>
+    </nav>
+
+    <section class="chat-section">
+        <div class="chat-sidebar">
+            <div class="bot-profile">
+                <div class="bot-avatar">🌷</div>
+                <h3>FlowerBot</h3>
+                <p>Your floral assistant</p>
+            </div>
+
+            <div class="quick-actions">
+                <h4>Quick Questions</h4>
+                <button class="quick-btn" data-query="Tell me about your flowers">About our flowers</button>
+                <button class="quick-btn" data-query="Do you offer discounts?">Discounts</button>
+                <button class="quick-btn" data-query="Delivery options">Delivery options</button>
+                <button class="quick-btn" data-query="Can we negotiate on price?">Price negotiation</button>
+            </div>
+
+            <div class="user-controls">
+                <label for="username">Your Name:</label>
+                <input type="text" id="username" placeholder="Enter your name">
+            </div>
+        </div>
+
+        <div class="chat-main">
+            <div id="chat-log" class="chat-messages">
+                <!-- Bot welcome message will appear here -->
+            </div>
+
+            <div class="chat-input-container">
+                <input id="chat-message-input" type="text" placeholder="Ask FlowerBot anything...">
+                <button id="chat-message-submit" class="primary-btn">Send</button>
+            </div>
+        </div>
+    </section>
+
+    {{ room_name|json_script:"room-name" }}
+    <script src="{% static 'scripts/chatbot.js' %}"></script>
+</body>
+
+</html>

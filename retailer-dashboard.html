@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Retailer Dashboard - Floral Couture</title>
+    <link rel="stylesheet" href="style/retailer-styles.css">
+</head>
+
+<body>
+    <div class="dashboard-container">
+        <aside class="dashboard-sidebar">
+            <div class="logo-container">
+                <h1>🌸 Floral Couture</h1>
+                <p>Retailer Portal</p>
+            </div>
+
+            <nav class="dashboard-nav">
+                <ul>
+                    <li class="active"><a href="#" data-section="overview">Dashboard Overview</a></li>
+                    <li><a href="#" data-section="products">Your Products</a></li>
+                    <li><a href="#" data-section="orders">Orders</a></li>
+                    <li><a href="#" data-section="settings">Account Settings</a></li>
+                </ul>
+            </nav>
+
+            <div class="sidebar-footer">
+                <button id="logoutBtn">Logout</button>
+            </div>
+        </aside>
+
+        <main class="dashboard-main">
+            <header class="dashboard-header">
+                <div class="retailer-info">
+                    <h2>Welcome, <span id="businessNameDisplay"></span></h2>
+                    <p class="store-name">Store: <span id="storeNameDisplay"></span></p>
+                    <p class="verification-status" id="verificationStatus"></p>
+                </div>
+                <div class="user-controls">
+                    <span id="notificationsIcon">🔔</span>
+                </div>
+            </header>
+
+            <div class="dashboard-content">
+                <!-- Overview Section -->
+                <section id="overview" class="dashboard-section active">
+                    <h3>Dashboard Overview</h3>
+
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <h4>Total Products</h4>
+                            <p class="stat-number">0</p>
+                        </div>
+                        <div class="stat-card">
+                            <h4>Orders Today</h4>
+                            <p class="stat-number">0</p>
+                        </div>
+                        <div class="stat-card">
+                            <h4>Total Revenue</h4>
+                            <p class="stat-number">₹0</p>
+                        </div>
+                        <div class="stat-card">
+                            <h4>Pending Orders</h4>
+                            <p class="stat-number">0</p>
+                        </div>
+                    </div>
+
+                    <div class="recent-activity">
+                        <h4>Recent Activity</h4>
+                        <div class="activity-list">
+                            <p class="empty-state">No recent activity</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Products Section -->
+                <section id="products" class="dashboard-section">
+                    <h3>Your Products</h3>
+                    <button id="addProductBtn" class="primary-btn">Add New Product</button>
+
+                    <div class="products-grid">
+                        <p class="empty-state">You haven't added any products yet</p>
+                    </div>
+
+                    <!-- Add Product Form -->
+                    <div id="addProductModal" class="modal">
+                        <div class="modal-content">
+                            <span class="close-modal">&times;</span>
+                            <h3>Add New Product</h3>
+                            <form id="addProductForm">
+                                <div class="form-group">
+                                    <label for="productName">Product Name</label>
+                                    <input type="text" id="productName" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="productDescription">Description</label>
+                                    <textarea id="productDescription" required></textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label for="productPrice">Price (₹)</label>
+                                    <input type="number" id="productPrice" min="0" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="productImage">Product Image</label>
+                                    <input type="file" id="productImage" accept="image/*">
+                                </div>
+                                <div class="form-group">
+                                    <label for="productCategory">Category</label>
+                                    <select id="productCategory" required>
+                                        <option value="simple">Simple Bouquet</option>
+                                        <option value="custom">Custom Bouquet</option>
+                                        <option value="special">Special Arrangement</option>
+                                    </select>
+                                </div>
+                                <button type="submit" class="primary-btn">Add Product</button>
+                            </form>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Orders Section -->
+                <section id="orders" class="dashboard-section">
+                    <h3>Orders</h3>
+                    <div class="orders-filters">
+                        <select id="orderStatusFilter">
+                            <option value="all">All Orders</option>
+                            <option value="pending">Pending</option>
+                            <option value="processing">Processing</option>
+                            <option value="completed">Completed</option>
+                            <option value="cancelled">Cancelled</option>
+                        </select>
+                        <input type="text" id="orderSearch" placeholder="Search orders...">
+                    </div>
+
+                    <div class="orders-list">
+                        <p class="empty-state">No orders found</p>
+                    </div>
+                </section>
+
+                <!-- Settings Section -->
+                <section id="settings" class="dashboard-section">
+                    <h3>Account Settings</h3>
+                    <form id="accountSettingsForm">
+                        <div class="form-message" id="settingsMessage"></div>
+                        <div class="form-group">
+                            <label for="settingsUsername">Username</label>
+                            <input type="text" id="settingsUsername" disabled>
+                        </div>
+                        <div class="form-group">
+                            <label for="settingsEmail">Email</label>
+                            <input type="email" id="settingsEmail" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="settingsStoreName">Store Name</label>
+                            <input type="text" id="settingsStoreName" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="settingsBusinessName">Business Name</label>
+                            <input type="text" id="settingsBusinessName" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="settingsPhone">Phone Number</label>
+                            <input type="tel" id="settingsPhone" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="settingsAddress">Business Address</label>
+                            <textarea id="settingsAddress" required></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="settingsPassword">New Password (leave empty to keep current)</label>
+                            <input type="password" id="settingsPassword">
+                        </div>
+                        <button type="submit" class="primary-btn">Save Changes</button>
+                    </form>
+                </section>
+            </div>
+        </main>
+    </div>
+
+    <script src="scripts/retailer-dashboard.js"></script>
+</body>
+
+</html>

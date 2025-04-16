@@ -7,44 +7,119 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Custom Bouquets - Floral Couture</title>
   <link rel="stylesheet" href="{% static 'style/styles.css' %}">
+  <link rel="stylesheet" href="{% static 'style/custom-bouquet.css' %}">
+  <link rel="stylesheet" href="{% static 'style/navbar.css' %}">
 </head>
 
 <body>
-
   <nav class="navbar">
-    <h1>💐 Custom Bouquets</h1>
+    <div class="navbar-logo">
+      <h1 data-icon="💐">Custom Bouquets</h1>
+    </div>
+    <div class="navbar-toggle">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
     <ul>
       <li><a href="{% url 'index' %}">Home</a></li>
       <li><a href="{% url 'simple_bouquets' %}">Bouquets</a></li>
+      <li><a class="active" href="{% url 'custom_bouquets' %}">Customize</a></li>
       <li><a href="{% url 'cart' %}">Cart</a></li>
     </ul>
   </nav>
 
-  <section class="custom-section">
-    <h2>Create Your Own Bouquet</h2>
-    <form id="customForm">
-      <label>Bouquet Name:
-        <input type="text" id="bouquetName" required>
-      </label>
+  <div class="page-content">
+    <section class="custom-section">
+      <div class="bouquet-preview">
+        <img src="{% static 'images/custom-bouquet.png' %}" alt="Custom Bouquet" class="preview-image">
+        <p class="preview-title">Your custom creation</p>
+      </div>
 
-      <label>Message:
-        <input type="text" id="message" placeholder="Optional message...">
-      </label>
+      <h2>Create Your Own Bouquet</h2>
+      <form id="customForm">
+        <div class="form-group">
+          <label for="bouquetName">Bouquet Name:</label>
+          <input type="text" id="bouquetName" placeholder="Give your bouquet a special name..." required>
+        </div>
 
-      <fieldset>
-        <legend>Select Custom Items:</legend>
-        {% for option in custom_options %}
-        <label><input type="checkbox" value="{{ option.name }}" data-price="{{ option.price }}"> {{ option.name }} (+₹{{
-          option.price }})</label>
-        {% endfor %}
-      </fieldset>
+        <div class="form-group">
+          <label for="message">Personal Message:</label>
+          <input type="text" id="message" placeholder="Add a special message with your flowers...">
+        </div>
 
-      <p><strong>Total Price: ₹<span id="customPrice">{{ base_price }}</span></strong></p>
-      <button type="submit">Add to Cart</button>
-    </form>
-  </section>
+        <div class="options-container">
+          <legend>Select Custom Items:</legend>
+          <div class="options-grid">
+            {% for option in custom_options %}
+            <div class="option-item">
+              <input type="checkbox" id="option{{ forloop.counter }}" class="option-checkbox" value="{{ option.name }}"
+                data-price="{{ option.price }}">
+              <span class="checkbox-custom"></span>
+              <div class="option-label">
+                <span class="option-name">{{ option.name }}</span>
+                <span class="option-price">+₹{{ option.price }}</span>
+              </div>
+            </div>
+            {% endfor %}
+          </div>
+        </div>
+
+        <div class="price-display">
+          <p>Total Price: ₹<span id="customPrice" class="price-amount">{{ base_price }}</span></p>
+        </div>
+
+        <button type="submit" class="custom-submit">Add to Cart</button>
+      </form>
+    </section>
+  </div>
 
   <script src="{% static 'scripts/custom.js' %}"></script>
+  <script>
+    // Add selection class to option items when clicked
+    document.querySelectorAll('.option-item').forEach(item => {
+      item.addEventListener('click', function (e) {
+        const checkbox = this.querySelector('.option-checkbox');
+        checkbox.checked = !checkbox.checked;
+        this.classList.toggle('selected', checkbox.checked);
+
+        // Trigger change event for price update
+        const event = new Event('change');
+        checkbox.dispatchEvent(event);
+      });
+    });
+
+    // Add animation when price updates
+    const priceElement = document.getElementById('customPrice');
+    const originalUpdatePrice = updatePrice;
+
+    function updatePrice() {
+      originalUpdatePrice();
+      priceElement.style.animation = 'price-update 0.5s';
+      setTimeout(() => {
+        priceElement.style.animation = '';
+      }, 500);
+    }
+
+    // Mobile navigation toggle
+    const navbarToggle = document.querySelector('.navbar-toggle');
+    const navbar = document.querySelector('.navbar');
+    const navMenu = document.querySelector('.navbar ul');
+
+    navbarToggle.addEventListener('click', function () {
+      navMenu.classList.toggle('open');
+      navbar.classList.toggle('menu-open');
+    });
+
+    // Navbar scroll effect
+    window.addEventListener('scroll', function () {
+      if (window.scrollY > 50) {
+        navbar.classList.add('scrolled');
+      } else {
+        navbar.classList.remove('scrolled');
+      }
+    });
+  </script>
 </body>
 
 </html>

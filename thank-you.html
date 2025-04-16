@@ -7,12 +7,20 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Thank You - Floral Couture</title>
   <link rel="stylesheet" href="{% static 'style/styles.css' %}">
+  <link rel="stylesheet" href="{% static 'style/navbar.css' %}">
+  <link rel="stylesheet" href="{% static 'style/thank-you.css' %}">
 </head>
 
 <body>
-
   <nav class="navbar">
-    <h1>🌸 Floral Couture</h1>
+    <div class="navbar-logo">
+      <h1 data-icon="🌸">Floral Couture</h1>
+    </div>
+    <div class="navbar-toggle">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
     <ul>
       <li><a href="{% url 'index' %}">Home</a></li>
       <li><a href="{% url 'custom_bouquets' %}">Custom Bouquets</a></li>
@@ -22,19 +30,39 @@
     </ul>
   </nav>
 
-  <section class="thank-you-section">
-    <div class="thank-you-content">
-      <h2>Thank You for Your Order!</h2>
-      <p class="checkmark">✓</p>
-      <p>Your order has been successfully placed.</p>
-      <p>Order #<span id="orderNumber">12345</span></p>
-      <p>We'll send you an email with all the details.</p>
+  <div class="page-content">
+    <div class="thank-you-container">
+      <div class="thank-you-card">
+        <div class="success-icon">✓</div>
 
-      <div class="next-steps">
-        <a href="{% url 'index' %}" class="btn">Continue Shopping</a>
+        <h1>Thank You for Your Order!</h1>
+
+        <div class="order-details">
+          <div class="order-number">
+            <span class="label">Order Number:</span>
+            <span id="orderNumber" class="value">12345</span>
+          </div>
+
+          <p class="confirmation-message">
+            Your order has been successfully placed. We'll send you an email with all the details shortly.
+          </p>
+
+          <div class="estimated-delivery">
+            <span class="label">Estimated Delivery:</span>
+            <span class="value">Within 24-48 hours</span>
+          </div>
+        </div>
+
+        <div class="decoration-flower left">🌹</div>
+        <div class="decoration-flower right">🌷</div>
+
+        <div class="actions">
+          <a href="{% url 'index' %}" class="btn primary-btn">Continue Shopping</a>
+          <a href="{% url 'contact' %}" class="btn secondary-btn">Contact Support</a>
+        </div>
       </div>
     </div>
-  </section>
+  </div>
 
   <script src="{% static 'scripts/thank-you.js' %}"></script>
 </body>

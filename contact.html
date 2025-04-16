@@ -88,9 +88,13 @@
     </section>
   </div>
 
-  <div id="chatbot-placeholder"></div>
+  <div id="chatbot-placeholder" data-session-id="{{ request.session.session_key|default:'guest' }}">
+    <!-- Chatbot will be loaded here -->
+  </div>
 
   <script src="{% static 'scripts/contact.js' %}"></script>
+  <link rel="stylesheet" href="{% static 'style/chatbot.css' %}">
+  <script src="{% static 'scripts/chatbot-embed.js' %}"></script>
   <script>
     // Mobile navigation toggle
     document.addEventListener('DOMContentLoaded', function () {

@@ -13,18 +13,6 @@ function getCSRFToken() {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-  // Load chatbot
-  fetch("chatbot.html")
-    .then((res) => res.text())
-    .then((html) => {
-      const chatbotContainer = document.getElementById("chatbot-placeholder");
-      if (chatbotContainer) {
-        chatbotContainer.innerHTML = html;
-      }
-    })
-    .catch((err) => {
-      console.error("Failed to load chatbot:", err);
-    });
 
   const contactForm = document.querySelector(".contact-form");
 

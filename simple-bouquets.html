@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Simple Bouquets - Floral Couture</title>
   <link rel="stylesheet" href="{% static 'style/styles.css' %}">
-   <link rel="stylesheet" href="{% static 'style/navbar.css' %}">
+  <link rel="stylesheet" href="{% static 'style/navbar.css' %}">
   <link rel="stylesheet" href="{% static 'style/product-grid.css' %}">
 </head>
 
@@ -94,8 +94,8 @@
 
   <script src="{% static 'scripts/simple.js' %}"></script>
   <script>
-    // Mobile navigation toggle
     document.addEventListener('DOMContentLoaded', function () {
+      // Mobile navigation toggle
       const navbarToggle = document.querySelector('.navbar-toggle');
       const navbar = document.querySelector('.navbar');
       const navMenu = document.querySelector('.navbar ul');
@@ -114,15 +114,89 @@
         }
       });
 
-      // Add animation to "Add to Cart" buttons
+      // FIXED: Add to cart functionality for static buttons
       document.querySelectorAll('.add-to-cart').forEach(button => {
         button.addEventListener('click', function () {
+          // Visual feedback
           this.classList.add('added');
           setTimeout(() => {
             this.classList.remove('added');
           }, 1500);
+
+          // Get product data from button attributes
+          const productId = this.dataset.id;
+          const productName = this.dataset.name;
+          const productPrice = parseInt(this.dataset.price);
+
+          // Create product object
+          const product = {
+            id: Date.now(), // Unique identifier
+            productId: productId,
+            name: productName,
+            price: productPrice,
+            type: "simple",
+          };
+
+          // Add to cart
+          addToCart(product);
+
+          // Show confirmation message
+          showAddedToCartMessage(productName);
         });
       });
+
+      // Function to add items to cart
+      function addToCart(item) {
+        let cart = localStorage.getItem("cart");
+
+        if (!cart) {
+          cart = [];
+        } else {
+          cart = JSON.parse(cart);
+        }
+
+        cart.push(item);
+        localStorage.setItem("cart", JSON.stringify(cart));
+
+        // Update cart count
+        updateCartCount();
+      }
+
+      // Function to show "Added to Cart" message
+      function showAddedToCartMessage(productName) {
+        // Create notification element if it doesn't exist
+        let notification = document.querySelector(".cart-notification");
+        if (!notification) {
+          notification = document.createElement("div");
+          notification.className = "cart-notification";
+          document.body.appendChild(notification);
+        }
+
+        // Set message and show notification
+        notification.textContent = `${productName} added to cart!`;
+        notification.classList.add("show");
+
+        // Hide notification after 3 seconds
+        setTimeout(() => {
+          notification.classList.remove("show");
+        }, 3000);
+      }
+
+      // Function to update cart count indicator
+      function updateCartCount() {
+        let cart = localStorage.getItem("cart");
+        if (!cart) {
+          cart = [];
+        } else {
+          cart = JSON.parse(cart);
+        }
+
+        const cartCount = cart.length;
+        const cartCountElement = document.querySelector(".cart-count");
+        if (cartCountElement) {
+          cartCountElement.textContent = cartCount;
+        }
+      }
     });
   </script>
 </body>

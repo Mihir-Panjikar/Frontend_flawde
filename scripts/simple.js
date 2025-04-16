@@ -118,34 +118,38 @@ const bouquets = [
   },
 ];
 
-const bouquetGrid = document.getElementById("bouquetGrid");
-
-bouquets.forEach((item, index) => {
-  const card = document.createElement("div");
-  card.className = "bouquet-card";
-  card.innerHTML = `
-      <img src="${item.image}" alt="${item.name}" />
-      <h3>${item.name}</h3>
-      <p>${item.description}</p>
-      <p><strong>₹${item.price}</strong></p>
-      <button class="add-to-cart" data-id="${index}" data-name="${item.name}" data-price="${item.price}">Add to Cart</button>
-    `;
-  bouquetGrid.appendChild(card);
-});
-
-// Get CSRF token for secure form submissions
-function getCSRFToken() {
-  const cookies = document.cookie.split(";");
-  for (let cookie of cookies) {
-    const [name, value] = cookie.trim().split("=");
-    if (name === "csrftoken") {
-      return value;
-    }
-  }
-  return "";
-}
-
 document.addEventListener("DOMContentLoaded", function () {
+  // Only generate cards if the bouquetGrid element exists
+  const bouquetGrid = document.getElementById("bouquetGrid");
+
+  if (bouquetGrid) {
+    // Generate dynamic cards only if the container exists
+    bouquets.forEach((item, index) => {
+      const card = document.createElement("div");
+      card.className = "bouquet-card";
+      card.innerHTML = `
+          <img src="${item.image}" alt="${item.name}" />
+          <h3>${item.name}</h3>
+          <p>${item.description}</p>
+          <p><strong>₹${item.price}</strong></p>
+          <button class="add-to-cart" data-id="${index}" data-name="${item.name}" data-price="${item.price}">Add to Cart</button>
+        `;
+      bouquetGrid.appendChild(card);
+    });
+  }
+
+  // Get CSRF token for secure form submissions
+  function getCSRFToken() {
+    const cookies = document.cookie.split(";");
+    for (let cookie of cookies) {
+      const [name, value] = cookie.trim().split("=");
+      if (name === "csrftoken") {
+        return value;
+      }
+    }
+    return "";
+  }
+
   // Get all "Add to Cart" buttons
   const addToCartButtons = document.querySelectorAll(".add-to-cart");
 

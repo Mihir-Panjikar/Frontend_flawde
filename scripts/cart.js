@@ -11,171 +11,13 @@ function getCSRFToken() {
 }
 
 document.addEventListener("DOMContentLoaded", function () {
-  const cartItemsContainer = document.getElementById("cart-items");
-  const subtotalElement = document.getElementById("subtotal");
-  const totalElement = document.getElementById("total");
-  const checkoutButton = document.getElementById("checkout-btn");
-  const emptyCartMessage = document.querySelector(".empty-cart");
+  loadCartItems();
 
-  // Load cart items
-  function loadCart() {
-    let cart = localStorage.getItem("cart");
-
-    if (!cart || JSON.parse(cart).length === 0) {
-      emptyCartMessage.style.display = "block";
-      updateCartTotals(0);
-      return;
-    }
-
-    cart = JSON.parse(cart);
-    emptyCartMessage.style.display = "none";
-
-    // Clear existing items
-    while (
-      cartItemsContainer.firstChild &&
-      cartItemsContainer.firstChild !== emptyCartMessage
-    ) {
-      cartItemsContainer.removeChild(cartItemsContainer.firstChild);
-    }
-
-    // Add each item to the cart UI
-    cart.forEach((item) => {
-      const cartItem = document.createElement("div");
-      cartItem.className = "cart-item";
-      cartItem.dataset.id = item.id;
-
-      let itemHTML = "";
-      if (item.type === "custom") {
-        // Custom bouquet display
-        itemHTML = `
-                    <div class="item-details">
-                        <h3>${item.name}</h3>
-                        <p>Custom Bouquet</p>
-                        <p class="item-options">Options: ${item.options
-                          .map((opt) => opt.name)
-                          .join(", ")}</p>
-                        ${
-                          item.message
-                            ? `<p class="item-message">"${item.message}"</p>`
-                            : ""
-                        }
-                    </div>
-                    <div class="item-price">₹${item.totalPrice}</div>
-                `;
-      } else {
-        // Standard bouquet display
-        itemHTML = `
-                    <div class="item-details">
-                        <h3>${item.name}</h3>
-                    </div>
-                    <div class="item-price">₹${item.price}</div>
-                `;
-      }
-
-      // Add remove button
-      itemHTML += `
-                <div class="item-actions">
-                    <button class="remove-item" data-id="${item.id}">Remove</button>
-                </div>
-            `;
-
-      cartItem.innerHTML = itemHTML;
-      cartItemsContainer.insertBefore(cartItem, emptyCartMessage);
-    });
-
-    // Add event listeners to remove buttons
-    document.querySelectorAll(".remove-item").forEach((button) => {
-      button.addEventListener("click", function () {
-        removeFromCart(this.dataset.id);
-      });
-    });
-
-    // Calculate and update totals
-    calculateCartTotal();
+  const checkoutBtn = document.getElementById("checkout-btn");
+  if (checkoutBtn) {
+    checkoutBtn.addEventListener("click", handleCheckout);
   }
 
-  // Remove item from cart
-  function removeFromCart(itemId) {
-    let cart = JSON.parse(localStorage.getItem("cart"));
-    cart = cart.filter((item) => item.id.toString() !== itemId.toString());
-    localStorage.setItem("cart", JSON.stringify(cart));
-
-    // Reload cart UI
-    loadCart();
-  }
-
-  // Calculate cart total
-  function calculateCartTotal() {
-    const cart = JSON.parse(localStorage.getItem("cart")) || [];
-    let subtotal = 0;
-
-    cart.forEach((item) => {
-      if (item.type === "custom") {
-        subtotal += item.totalPrice;
-      } else {
-        subtotal += parseInt(item.price);
-      }
-    });
-
-    updateCartTotals(subtotal);
-  }
-
-  // Update displayed totals
-  function updateCartTotals(subtotal) {
-    const deliveryFee = subtotal > 0 ? 50 : 0;
-    const total = subtotal + deliveryFee;
-
-    subtotalElement.textContent = `₹${subtotal}`;
-    totalElement.textContent = `₹${total}`;
-
-    // Disable checkout button if cart is empty
-    checkoutButton.disabled = subtotal === 0;
-  }
-
-  // Handle checkout process
-  checkoutButton.addEventListener("click", function () {
-    const cart = JSON.parse(localStorage.getItem("cart")) || [];
-    if (cart.length === 0) {
-      alert("Your cart is empty!");
-      return;
-    }
-
-    // Option 1: Send cart to backend for processing
-    /*
-        fetch('/api/orders/create/', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'X-CSRFToken': getCSRFToken()
-            },
-            body: JSON.stringify({
-                items: cart,
-                total: parseFloat(totalElement.textContent.replace('₹', ''))
-            })
-        })
-        .then(response => response.json())
-        .then(data => {
-            console.log('Order created:', data);
-            // Clear cart after successful order
-            localStorage.removeItem('cart');
-            window.location.href = '/thank-you/';
-        })
-        .catch(error => {
-            console.error('Error creating order:', error);
-        });
-        */
-
-    // Option 2: For demo, just go to thank you page
-    localStorage.removeItem("cart");
-    window.location.href = "/thank-you/";
-  });
-
-  // Initialize
-  loadCart();
-});
-
-// Add this to the bottom of each page with a navbar
-document.addEventListener("DOMContentLoaded", function () {
   const navbarToggle = document.querySelector(".navbar-toggle");
   const navbar = document.querySelector(".navbar");
   const navMenu = document.querySelector(".navbar ul");
@@ -210,11 +52,171 @@ document.addEventListener("DOMContentLoaded", function () {
   updateCartCount();
 });
 
+function loadCartItems() {
+  // Get cart data from localStorage
+  const cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
+  const cartContainer = document.getElementById("cart-items");
+
+  // Clear previous content
+  cartContainer.innerHTML = "";
+
+  if (cartItems.length === 0) {
+    cartContainer.innerHTML = '<p class="empty-cart">Your cart is empty.</p>';
+    document.getElementById("checkout-btn").disabled = true;
+    return;
+  }
+
+  // Calculate totals
+  let subtotal = 0;
+
+  // Display each item
+  cartItems.forEach((item) => {
+    const itemTotal = item.price * item.quantity;
+    subtotal += itemTotal;
+
+    // Create cart item element
+    const cartItemElement = document.createElement("div");
+    cartItemElement.className = "cart-item";
+    cartItemElement.innerHTML = `
+            <img src="${item.image}" alt="${item.name}">
+            <div class="cart-item-details">
+                <h3>${item.name}</h3>
+                <p>₹${item.price}</p>
+                <div class="quantity-controls">
+                    <button class="quantity-btn decrease" data-id="${item.id}">-</button>
+                    <span class="quantity">${item.quantity}</span>
+                    <button class="quantity-btn increase" data-id="${item.id}">+</button>
+                </div>
+            </div>
+            <button class="remove-btn" data-id="${item.id}">×</button>
+        `;
+
+    cartContainer.appendChild(cartItemElement);
+  });
+
+  // Update summary
+  document.getElementById("subtotal").textContent = `₹${subtotal}`;
+  const deliveryFee = 50;
+  const total = subtotal + deliveryFee;
+  document.getElementById("total").textContent = `₹${total}`;
+
+  // Add event listeners for buttons
+  addCartEventListeners();
+}
+
+async function handleCheckout() {
+  const cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
+
+  if (cartItems.length === 0) {
+    alert("Your cart is empty");
+    return;
+  }
+
+  // Prepare order data
+  const orderData = {
+    status: "Pending",
+    items: cartItems.map((item) => ({
+      product: item.id,
+      quantity: item.quantity,
+    })),
+  };
+
+  try {
+    // Send order data to backend
+    const response = await fetch("/api/orders/create/", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "X-CSRFToken": getCookie("csrftoken"),
+      },
+      body: JSON.stringify(orderData),
+    });
+
+    const data = await response.json();
+
+    if (response.ok) {
+      // Store order ID for thank you page
+      sessionStorage.setItem("lastOrderId", data.order_id);
+      // Clear the cart
+      localStorage.removeItem("cartItems");
+      // Redirect to thank you page
+      window.location.href = "/thank-you/";
+    } else {
+      alert(`Error: ${data.error || "Could not create order"}`);
+    }
+  } catch (error) {
+    console.error("Error creating order:", error);
+    alert("There was a problem processing your order. Please try again.");
+  }
+}
+
+// Helper function to get CSRF token from cookies
+function getCookie(name) {
+  let cookieValue = null;
+  if (document.cookie && document.cookie !== "") {
+    const cookies = document.cookie.split(";");
+    for (let i = 0; i < cookies.length; i++) {
+      const cookie = cookies[i].trim();
+      if (cookie.substring(0, name.length + 1) === name + "=") {
+        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+        break;
+      }
+    }
+  }
+  return cookieValue;
+}
+
 function updateCartCount() {
   const cartCounter = document.querySelector(".cart-icon span");
   if (cartCounter) {
-    const cart = JSON.parse(localStorage.getItem("cart")) || [];
+    const cart = JSON.parse(localStorage.getItem("cartItems")) || [];
     cartCounter.textContent = cart.length;
     cartCounter.style.display = cart.length > 0 ? "flex" : "none";
   }
+}
+
+function addCartEventListeners() {
+  const decreaseButtons = document.querySelectorAll(".quantity-btn.decrease");
+  const increaseButtons = document.querySelectorAll(".quantity-btn.increase");
+  const removeButtons = document.querySelectorAll(".remove-btn");
+
+  decreaseButtons.forEach((button) => {
+    button.addEventListener("click", function () {
+      updateItemQuantity(this.dataset.id, -1);
+    });
+  });
+
+  increaseButtons.forEach((button) => {
+    button.addEventListener("click", function () {
+      updateItemQuantity(this.dataset.id, 1);
+    });
+  });
+
+  removeButtons.forEach((button) => {
+    button.addEventListener("click", function () {
+      removeItemFromCart(this.dataset.id);
+    });
+  });
+}
+
+function updateItemQuantity(itemId, change) {
+  const cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
+  const item = cartItems.find((item) => item.id.toString() === itemId.toString());
+
+  if (item) {
+    item.quantity += change;
+    if (item.quantity <= 0) {
+      removeItemFromCart(itemId);
+    } else {
+      localStorage.setItem("cartItems", JSON.stringify(cartItems));
+      loadCartItems();
+    }
+  }
+}
+
+function removeItemFromCart(itemId) {
+  let cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
+  cartItems = cartItems.filter((item) => item.id.toString() !== itemId.toString());
+  localStorage.setItem("cartItems", JSON.stringify(cartItems));
+  loadCartItems();
 }

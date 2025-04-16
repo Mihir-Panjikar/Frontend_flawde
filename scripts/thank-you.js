@@ -1,19 +1,16 @@
 document.addEventListener("DOMContentLoaded", function () {
-  // Get order number element
-  const orderNumberElement = document.getElementById("orderNumber");
+  // Get order ID from session storage
+  const orderId = sessionStorage.getItem("lastOrderId");
 
-  // Try to get order number from URL parameters
-  const urlParams = new URLSearchParams(window.location.search);
-  const orderNumber = urlParams.get("order");
+  if (orderId) {
+    // Display the order number
+    document.getElementById("orderNumber").textContent = orderId;
 
-  if (orderNumber) {
-    // If order number is in URL parameters, display it
-    orderNumberElement.textContent = orderNumber;
+    // Optional: fetch order details from backend
+    fetchOrderDetails(orderId);
   } else {
-    // Otherwise generate a random order number for demo purposes
-    // In a real application, this would come from your backend
-    const randomOrderNumber = Math.floor(100000 + Math.random() * 900000);
-    orderNumberElement.textContent = randomOrderNumber;
+    // Fallback if no order ID
+    document.getElementById("orderNumber").textContent = "N/A";
   }
 
   // Optional: Create confetti effect for celebration
@@ -88,3 +85,14 @@ document.addEventListener("DOMContentLoaded", function () {
     `;
   document.head.appendChild(style);
 });
+
+async function fetchOrderDetails(orderId) {
+  try {
+    // You can implement this to fetch additional order details
+    // const response = await fetch(`/api/orders/${orderId}/`);
+    // const data = await response.json();
+    // Update UI with additional order details if needed
+  } catch (error) {
+    console.error("Error fetching order details:", error);
+  }
+}

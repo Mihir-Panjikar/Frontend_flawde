@@ -1,0 +1,202 @@
+d_flawde/auth.html
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Account - Floral Couture</title>
+  <link rel="stylesheet" href="{% static 'style/styles.css' %}">
+  <link rel="stylesheet" href="{% static 'style/navbar.css' %}">
+  <link rel="stylesheet" href="{% static 'style/auth.css' %}">
+</head>
+<body>
+  <!-- Navigation -->
+  <nav class="navbar">
+    <div class="navbar-logo">
+      <h1 data-icon="🌸">Floral Couture</h1>
+    </div>
+    <div class="navbar-toggle">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+    <ul>
+      <li><a href="{% url 'index' %}">Home</a></li>
+      <li><a href="{% url 'custom_bouquets' %}">Custom Bouquets</a></li>
+      <li><a href="{% url 'simple_bouquets' %}">Simple Bouquets</a></li>
+      <li><a href="{% url 'cart' %}">Cart</a></li>
+      <li><a href="{% url 'contact' %}">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- Authentication Container -->
+  <div class="auth-container">
+    <div class="auth-card">
+      <!-- User Type Toggle -->
+      <div class="user-type-toggle">
+        <button id="customerToggle" class="user-type-btn active">Customer</button>
+        <button id="retailerToggle" class="user-type-btn">Retailer</button>
+      </div>
+      
+      <!-- CUSTOMER SECTION -->
+      <div id="customerSection" class="user-type-section">
+        <!-- Toggle Buttons -->
+        <div class="auth-toggle">
+          <button id="customerLoginToggle" class="toggle-btn active">Login</button>
+          <button id="customerSignupToggle" class="toggle-btn">Sign Up</button>
+        </div>
+        
+        <!-- Customer Login Form -->
+        <form id="customerLoginForm" class="auth-form">
+          <h2>Customer Login</h2>
+          <div class="form-message" id="customerLoginMessage"></div>
+          
+          <div class="form-group">
+            <label for="customerLoginUsername">Username</label>
+            <input type="text" id="customerLoginUsername" name="username" required>
+          </div>
+          
+          <div class="form-group">
+            <label for="customerLoginPassword">Password</label>
+            <input type="password" id="customerLoginPassword" name="password" required>
+          </div>
+          
+          <div class="form-group">
+            <button type="submit" class="primary-btn">Login</button>
+          </div>
+          
+          <div class="form-footer">
+            <a href="#" id="customerForgotPasswordLink">Forgot Password?</a>
+          </div>
+        </form>
+        
+        <!-- Customer Sign Up Form -->
+        <form id="customerSignupForm" class="auth-form hidden">
+          <h2>Create Customer Account</h2>
+          <div class="form-message" id="customerSignupMessage"></div>
+          
+          <div class="form-group">
+            <label for="customerSignupUsername">Username</label>
+            <input type="text" id="customerSignupUsername" name="username" required>
+          </div>
+          
+          <div class="form-group">
+            <label for="customerSignupEmail">Email</label>
+            <input type="email" id="customerSignupEmail" name="email" required>
+          </div>
+          
+          <div class="form-group">
+            <label for="customerSignupPassword">Password</label>
+            <input type="password" id="customerSignupPassword" name="password" required>
+          </div>
+          
+          <div class="form-group">
+            <label for="customerSignupPasswordConfirm">Confirm Password</label>
+            <input type="password" id="customerSignupPasswordConfirm" name="passwordConfirm" required>
+          </div>
+          
+          <div class="form-group">
+            <label for="customerSignupPhone">Phone Number (Optional)</label>
+            <input type="tel" id="customerSignupPhone" name="phone_number">
+          </div>
+          
+          <div class="form-group">
+            <label for="customerSignupAddress">Address (Optional)</label>
+            <textarea id="customerSignupAddress" name="address" rows="3"></textarea>
+          </div>
+          
+          <div class="form-group">
+            <button type="submit" class="primary-btn">Sign Up</button>
+          </div>
+        </form>
+      </div>
+      
+      <!-- RETAILER SECTION -->
+      <div id="retailerSection" class="user-type-section hidden">
+        <!-- Toggle Buttons -->
+        <div class="auth-toggle">
+          <button id="retailerLoginToggle" class="toggle-btn active">Login</button>
+          <button id="retailerSignupToggle" class="toggle-btn">Sign Up</button>
+        </div>
+        
+        <!-- Retailer Login Form -->
+        <form id="retailerLoginForm" class="auth-form">
+          <h2>Retailer Login</h2>
+          <div class="form-message" id="retailerLoginMessage"></div>
+          
+          <div class="form-group">
+            <label for="retailerLoginUsername">Username</label>
+            <input type="text" id="retailerLoginUsername" name="username" required>
+          </div>
+          
+          <div class="form-group">
+            <label for="retailerLoginPassword">Password</label>
+            <input type="password" id="retailerLoginPassword" name="password" required>
+          </div>
+          
+          <div class="form-group">
+            <button type="submit" class="primary-btn">Login</button>
+          </div>
+          
+          <div class="form-footer">
+            <a href="#" id="retailerForgotPasswordLink">Forgot Password?</a>
+          </div>
+        </form>
+        
+        <!-- Retailer Sign Up Form -->
+        <form id="retailerSignupForm" class="auth-form hidden">
+          <h2>Create Retailer Account</h2>
+          <div class="form-message" id="retailerSignupMessage"></div>
+          
+          <div class="form-group">
+            <label for="retailerSignupUsername">Username</label>
+            <input type="text" id="retailerSignupUsername" name="username" required>
+          </div>
+          
+          <div class="form-group">
+            <label for="retailerSignupEmail">Email</label>
+            <input type="email" id="retailerSignupEmail" name="email" required>
+          </div>
+          
+          <div class="form-group">
+            <label for="retailerSignupPassword">Password</label>
+            <input type="password" id="retailerSignupPassword" name="password" required>
+          </div>
+          
+          <div class="form-group">
+            <label for="retailerSignupPasswordConfirm">Confirm Password</label>
+            <input type="password" id="retailerSignupPasswordConfirm" name="passwordConfirm" required>
+          </div>
+          
+          <div class="form-group">
+            <label for="retailerSignupStoreName">Store Name</label>
+            <input type="text" id="retailerSignupStoreName" name="store_name" required>
+          </div>
+          
+          <div class="form-group">
+            <label for="retailerSignupBusinessName">Business Name</label>
+            <input type="text" id="retailerSignupBusinessName" name="business_name" required>
+          </div>
+          
+          <div class="form-group">
+            <label for="retailerSignupPhone">Phone Number</label>
+            <input type="tel" id="retailerSignupPhone" name="phone_number" required>
+          </div>
+          
+          <div class="form-group">
+            <label for="retailerSignupAddress">Business Address</label>
+            <textarea id="retailerSignupAddress" name="address" rows="3" required></textarea>
+          </div>
+          
+          <div class="form-group">
+            <button type="submit" class="primary-btn">Sign Up</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <script src="{% static 'scripts/auth.js' %}"></script>
+</body>
+</html>

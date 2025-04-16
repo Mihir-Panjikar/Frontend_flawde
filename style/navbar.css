@@ -59,11 +59,13 @@
 .navbar ul li a {
   text-decoration: none;
   color: white;
-  font-weight: bold;
+  font-weight: 800; /* Change from 'bold' (700) to 800 for extra boldness */
   padding: 8px 0;
   position: relative;
   transition: all 0.3s ease;
   font-size: 16px;
+  letter-spacing: 0.5px; /* Add slight letter spacing for better readability */
+  text-shadow: 0px 0px 1px rgba(255, 255, 255, 0.5); /* Add subtle text shadow for emphasis */
 }
 
 .navbar ul li a::after {
@@ -115,6 +117,45 @@
 /* Content Adjustment for Fixed Navbar */
 .page-content {
   padding-top: 80px;
+}
+
+/* User menu styling */
+#auth-nav-item {
+  position: relative;
+}
+
+#user-menu {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background-color: white;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+  width: 180px;
+  z-index: 100;
+  transition: all 0.3s ease;
+}
+
+#user-menu a {
+  display: block;
+  padding: 12px 16px;
+  color: #333;
+  text-decoration: none;
+  font-size: 14px;
+  border-bottom: 1px solid #eee;
+}
+
+#user-menu a:last-child {
+  border-bottom: none;
+}
+
+#user-menu a:hover {
+  background-color: #f9f3f5;
+  color: #e75480;
+}
+
+.hidden {
+  display: none !important;
 }
 
 /* Responsive Design */

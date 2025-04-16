@@ -50,15 +50,8 @@
       </div>
     </div>
   </section>
-  <div id="chatbot-placeholder">
-
-    <script src="{% static 'scripts/chatbot.js' %}"></script>
-    fetch("chatbot.html")
-    .then(res => res.text())
-    .then(html => {
-    document.getElementById("chatbot-placeholder").innerHTML = html;
-    });
-    </script>
+  <div id="chatbot-placeholder" data-session-id="{{ request.session.session_key|default:'guest' }}">
+    <!-- Chatbot will be loaded here -->
   </div>
 
   <script src="{% static 'scripts/cart.js' %}"></script>
@@ -84,6 +77,8 @@
       });
     });
   </script>
+  <link rel="stylesheet" href="{% static 'style/chatbot.css' %}">
+  <script src="{% static 'scripts/chatbot-embed.js' %}"></script>
 </body>
 
 </html>

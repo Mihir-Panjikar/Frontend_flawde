@@ -1,0 +1,207 @@
+/* Auth Page Styling */
+.auth-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: calc(100vh - 80px);
+  padding: 40px 20px;
+  background-color: #f9f7f5;
+}
+
+.auth-card {
+  width: 100%;
+  max-width: 500px;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+  padding: 30px;
+  transition: all 0.3s ease;
+}
+
+/* User Type Toggle */
+.user-type-toggle {
+  display: flex;
+  margin-bottom: 20px;
+  gap: 10px;
+}
+
+.user-type-btn {
+  flex: 1;
+  padding: 12px 20px;
+  font-size: 16px;
+  font-weight: 600;
+  background-color: #f5f5f5;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  color: #666;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.user-type-btn.active {
+  background-color: #e75480;
+  border-color: #e75480;
+  color: white;
+}
+
+.user-type-section {
+  transition: all 0.3s ease;
+}
+
+/* Auth Toggle */
+.auth-toggle {
+  display: flex;
+  margin-bottom: 30px;
+  border-bottom: 1px solid #eee;
+}
+
+.toggle-btn {
+  background: none;
+  border: none;
+  padding: 12px 20px;
+  font-size: 16px;
+  font-weight: 600;
+  color: #888;
+  cursor: pointer;
+  position: relative;
+  transition: all 0.2s ease;
+}
+
+.toggle-btn.active {
+  color: #e75480;
+}
+
+.toggle-btn.active::after {
+  content: '';
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background-color: #e75480;
+  border-radius: 3px 3px 0 0;
+}
+
+.auth-form {
+  transition: all 0.3s ease;
+}
+
+.auth-form h2 {
+  font-size: 24px;
+  color: #333;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  display: block;
+  font-size: 14px;
+  color: #555;
+  margin-bottom: 6px;
+}
+
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  padding: 12px 15px;
+  font-size: 15px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  transition: border 0.3s ease;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  border-color: #e75480;
+  outline: none;
+}
+
+.form-group textarea {
+  resize: vertical;
+  min-height: 60px;
+}
+
+.primary-btn {
+  width: 100%;
+  padding: 12px;
+  background-color: #e75480;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.primary-btn:hover {
+  background-color: #d64573;
+}
+
+.form-footer {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.form-footer a {
+  color: #e75480;
+  text-decoration: none;
+}
+
+.form-message {
+  padding: 10px;
+  margin-bottom: 20px;
+  border-radius: 5px;
+  font-size: 14px;
+  display: none;
+}
+
+.form-message.success {
+  background-color: #e7f5e7;
+  color: #288728;
+  border: 1px solid #c3e6c3;
+  display: block;
+}
+
+.form-message.error {
+  background-color: #f8e6e6;
+  color: #e74c3c;
+  border: 1px solid #f5c6c6;
+  display: block;
+}
+
+.hidden {
+  display: none;
+}
+
+/* Responsive adjustments */
+@media (max-width: 600px) {
+  .auth-card {
+    padding: 20px;
+  }
+  
+  .user-type-btn {
+    padding: 10px 15px;
+    font-size: 14px;
+  }
+  
+  .toggle-btn {
+    padding: 10px 15px;
+    font-size: 14px;
+  }
+  
+  .auth-form h2 {
+    font-size: 20px;
+  }
+  
+  .form-group input,
+  .form-group textarea,
+  .primary-btn {
+    padding: 10px;
+    font-size: 14px;
+  }
+}

@@ -26,6 +26,7 @@
 .navbar-logo {
   display: flex;
   align-items: center;
+  margin-right: 20%; /* Increased from 5% to 20% for more significant spacing */
 }
 
 .navbar h1 {

@@ -7,6 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Your Cart - Floral Couture</title>
   <link rel="stylesheet" href="{% static 'style/styles.css' %}">
+  <link rel="stylesheet" href="{% static 'style/cart.css' %}">
 </head>
 
 <body>
@@ -15,8 +16,9 @@
     <h1>🛒 Your Cart</h1>
     <ul>
       <li><a href="{% url 'index' %}">Home</a></li>
-      <li><a href="{% url 'simple_bouquets' %}">Bouquets</a></li>
-      <li><a href="{% url 'custom_bouquets' %}">Customise</a></li>
+      <li><a href="{% url 'custom_bouquets' %}">Custom Bouquets</a></li>
+      <li><a href="{% url 'simple_bouquets' %}">Simple Bouquets</a></li>
+      <li><a href="{% url 'cart' %}">Cart</a></li>
       <li><a href="{% url 'contact' %}">Contact</a></li>
     </ul>
   </nav>
@@ -60,6 +62,28 @@
   </div>
 
   <script src="{% static 'scripts/cart.js' %}"></script>
+  <script>
+    // Mobile navigation toggle
+    document.addEventListener('DOMContentLoaded', function () {
+      const navbarToggle = document.querySelector('.navbar-toggle');
+      const navbar = document.querySelector('.navbar');
+      const navMenu = document.querySelector('.navbar ul');
+
+      navbarToggle.addEventListener('click', function () {
+        navMenu.classList.toggle('open');
+        navbar.classList.toggle('menu-open');
+      });
+
+      // Navbar scroll effect
+      window.addEventListener('scroll', function () {
+        if (window.scrollY > 50) {
+          navbar.classList.add('scrolled');
+        } else {
+          navbar.classList.remove('scrolled');
+        }
+      });
+    });
+  </script>
 </body>
 
 </html>

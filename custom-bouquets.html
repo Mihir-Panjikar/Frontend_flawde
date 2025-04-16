@@ -23,16 +23,17 @@
     </div>
     <ul>
       <li><a href="{% url 'index' %}">Home</a></li>
-      <li><a href="{% url 'simple_bouquets' %}">Bouquets</a></li>
-      <li><a class="active" href="{% url 'custom_bouquets' %}">Customize</a></li>
+      <li><a href="{% url 'custom_bouquets' %}">Custom Bouquets</a></li>
+      <li><a href="{% url 'simple_bouquets' %}">Simple Bouquets</a></li>
       <li><a href="{% url 'cart' %}">Cart</a></li>
+      <li><a href="{% url 'contact' %}">Contact</a></li>
     </ul>
   </nav>
 
   <div class="page-content">
     <section class="custom-section">
       <div class="bouquet-preview">
-        <img src="{% static 'images/custom-bouquet.png' %}" alt="Custom Bouquet" class="preview-image">
+        <img src="{% static 'assets/Personalized_Bouquet.jpg' %}" alt="Custom Bouquet" class="preview-image">
         <p class="preview-title">Your custom creation</p>
       </div>
 

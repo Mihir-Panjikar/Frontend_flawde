@@ -1,31 +1,54 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Simple Bouquets - Floral Couture</title>
-  <link rel="stylesheet" href="style/styles.css">
+  <link rel="stylesheet" href="{% static 'style/styles.css' %}">
 </head>
+
 <body>
 
   <nav class="navbar">
     <h1>🌼 Floral Couture</h1>
     <ul>
-      <li><a href="index.html">Home</a></li>
-      <li><a href="simple-bouquets.html">Bouquets</a></li>
-      <li><a href="custom-bouquets.html">Customise</a></li>
-      <li><a href="cart.html">Cart</a></li>
-      <li><a href="contact.html">Contact</a></li>
+      <li><a href="{% url 'index' %}">Home</a></li>
+      <li><a href="{% url 'simple_bouquets' %}">Bouquets</a></li>
+      <li><a href="{% url 'custom_bouquets' %}">Customise</a></li>
+      <li><a href="{% url 'cart' %}">Cart</a></li>
+      <li><a href="{% url 'contact' %}">Contact</a></li>
     </ul>
   </nav>
 
-  <section class="bouquet-list">
-    <h2>Pick a Pre-made Bouquet</h2>
-    <div class="bouquet-grid" id="bouquetGrid">
-      <!-- JS will populate this -->
+  <section class="product-grid">
+    <div class="product-card">
+      <img src="{% static 'assets/Black_Rose_Bouquet.jpeg' %}" alt="Black Roses">
+      <h3>Black Rose Bouquet</h3>
+      <p>Elegant arrangement of specially dyed roses.</p>
+      <p class="price">₹999</p>
+      <button class="add-to-cart" data-id="1" data-name="Black Rose Bouquet" data-price="999">Add to Cart</button>
+    </div>
+
+    <div class="product-card">
+      <img src="{% static 'assets/Red_Rose_Bouquet.jpg' %}" alt="Red Roses">
+      <h3>Red Rose Bouquet</h3>
+      <p>Classic arrangement of fresh red roses.</p>
+      <p class="price">₹799</p>
+      <button class="add-to-cart" data-id="2" data-name="Red Rose Bouquet" data-price="799">Add to Cart</button>
+    </div>
+
+    <div class="product-card">
+      <img src="{% static 'assets/White_Lily_Bouquet.jpg' %}" alt="White Lilies">
+      <h3>White Lily Bouquet</h3>
+      <p>Pure white lilies symbolizing peace and elegance.</p>
+      <p class="price">₹899</p>
+      <button class="add-to-cart" data-id="3" data-name="White Lily Bouquet" data-price="899">Add to Cart</button>
     </div>
   </section>
 
-  <script src="scripts/simple.js"></script>
+  <script src="{% static 'scripts/simple.js' %}"></script>
 </body>
+
 </html>

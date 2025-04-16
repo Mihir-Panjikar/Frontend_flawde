@@ -1,42 +1,65 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Your Cart - Floral Couture</title>
-  <link rel="stylesheet" href="style/styles.css">
+  <link rel="stylesheet" href="{% static 'style/styles.css' %}">
 </head>
+
 <body>
 
   <nav class="navbar">
     <h1>🛒 Your Cart</h1>
     <ul>
-      <li><a href="index.html">Home</a></li>
-      <li><a href="simple-bouquets.html">Bouquets</a></li>
-      <li><a href="custom-bouquets.html">Customise</a></li>
-      <li><a href="contact.html">Contact</a></li>
+      <li><a href="{% url 'index' %}">Home</a></li>
+      <li><a href="{% url 'simple_bouquets' %}">Bouquets</a></li>
+      <li><a href="{% url 'custom_bouquets' %}">Customise</a></li>
+      <li><a href="{% url 'contact' %}">Contact</a></li>
     </ul>
   </nav>
 
   <section class="cart-section">
-    <h2>Items in Your Cart</h2>
-    <div id="cartItems" class="cart-items"></div>
-    <div class="cart-summary">
-      <p><strong>Total: ₹<span id="totalPrice">0</span></strong></p>
-      <button onclick="placeOrder()">Place Order</button>
+    <h2>Your Selected Items</h2>
+
+    <div class="cart-container">
+      <div id="cart-items">
+        <!-- Cart items will be dynamically inserted here -->
+        <p class="empty-cart">Your cart is empty.</p>
+      </div>
+
+      <div class="cart-summary">
+        <h3>Order Summary</h3>
+        <div class="summary-row">
+          <span>Subtotal:</span>
+          <span id="subtotal">₹0</span>
+        </div>
+        <div class="summary-row">
+          <span>Delivery:</span>
+          <span id="delivery">₹50</span>
+        </div>
+        <div class="summary-row total">
+          <span>Total:</span>
+          <span id="total">₹50</span>
+        </div>
+        <button id="checkout-btn" class="primary-btn">Proceed to Checkout</button>
+      </div>
     </div>
   </section>
   <div id="chatbot-placeholder">
 
-    <script src="scripts/contact.js">
-      fetch("chatbot.html")
-        .then(res => res.text())
-        .then(html => {
-          document.getElementById("chatbot-placeholder").innerHTML = html;
-        });
+    <script src="{% static 'scripts/chatbot.js' %}"></script>
+    fetch("chatbot.html")
+    .then(res => res.text())
+    .then(html => {
+    document.getElementById("chatbot-placeholder").innerHTML = html;
+    });
     </script>
-    </div>
+  </div>
 
-  <script src="scripts/cart.js"></script>
+  <script src="{% static 'scripts/cart.js' %}"></script>
 </body>
+
 </html>

@@ -1,16 +1,41 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Thank You - Floral Couture</title>
-  <link rel="stylesheet" href="style/styles.css">
+  <link rel="stylesheet" href="{% static 'style/styles.css' %}">
 </head>
+
 <body>
-  <section class="thank-you">
-    <h2>💐 Thank You!</h2>
-    <p>Your bouquet will be blooming its way to you soon.</p>
-    <a href="index.html">Return to Home</a>
+
+  <nav class="navbar">
+    <h1>🌸 Floral Couture</h1>
+    <ul>
+      <li><a href="{% url 'index' %}">Home</a></li>
+      <li><a href="{% url 'simple_bouquets' %}">Bouquets</a></li>
+      <li><a href="{% url 'custom_bouquets' %}">Customise</a></li>
+      <li><a href="{% url 'contact' %}">Contact</a></li>
+    </ul>
+  </nav>
+
+  <section class="thank-you-section">
+    <div class="thank-you-content">
+      <h2>Thank You for Your Order!</h2>
+      <p class="checkmark">✓</p>
+      <p>Your order has been successfully placed.</p>
+      <p>Order #<span id="orderNumber">12345</span></p>
+      <p>We'll send you an email with all the details.</p>
+
+      <div class="next-steps">
+        <a href="{% url 'index' %}" class="btn">Continue Shopping</a>
+      </div>
+    </div>
   </section>
+
+  <script src="{% static 'scripts/thank-you.js' %}"></script>
 </body>
+
 </html>

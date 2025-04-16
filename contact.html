@@ -1,35 +1,71 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Contact Us | Bloomify</title>
-  <link rel="stylesheet" href="style/contact.css" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact Us - Floral Couture</title>
+  <link rel="stylesheet" href="{% static 'style/styles.css' %}">
 </head>
 <body>
 
-  <header>
-    <h1>🌸 Floral Couture</h1>
-    <nav>
-      <ul>
-        <li><a href="index.html">Home</a></li>
-        <li><a href="simple-bouquets.html">Simple Bouquets</a></li>
-        <li><a href="custom-bouquets.html">Custom Bouquets</a></li>
-        <li><a href="cart.html">Cart</a></li>
-        <li><a href="contact.html" class="active">Contact</a></li>
-      </ul>
-    </nav>
-  </header>
+  <nav class="navbar">
+    <h1>📞 Contact Us</h1>
+    <ul>
+      <li><a href="{% url 'index' %}">Home</a></li>
+      <li><a href="{% url 'simple_bouquets' %}">Bouquets</a></li>
+      <li><a href="{% url 'custom_bouquets' %}">Customise</a></li>
+      <li><a href="{% url 'cart' %}">Cart</a></li>
+    </ul>
+  </nav>
 
-  <section class="contact">
-    <h2>Contact Us</h2>
-    <p>Got questions or requests? Send us a message!</p>
-
+  <section class="contact-section">
+    <div class="contact-info">
+      <h2>How Can We Help You?</h2>
+      <p>Have questions about our bouquets or need assistance with an order? We're here to help!</p>
+      
+      <div class="contact-details">
+        <div class="contact-item">
+          <h3>📱 Phone</h3>
+          <p>+91 9876543210</p>
+        </div>
+        
+        <div class="contact-item">
+          <h3>✉️ Email</h3>
+          <p>hello@floralcouture.com</p>
+        </div>
+        
+        <div class="contact-item">
+          <h3>🏠 Address</h3>
+          <p>123 Flower Street, Garden City<br>Bangalore - 560001</p>
+        </div>
+      </div>
+    </div>
+    
     <form class="contact-form">
-      <input type="text" placeholder="Your Name" required />
-      <input type="text" placeholder="Your Contact (Phone or Email)" required />
-      <textarea placeholder="Your Message" required></textarea>
-      <button type="submit">Send Message</button>
+      <h3>Send Us a Message</h3>
+      
+      <div class="form-group">
+        <label for="name">Name</label>
+        <input type="text" id="name" name="name" required>
+      </div>
+      
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" required>
+      </div>
+      
+      <div class="form-group">
+        <label for="subject">Subject</label>
+        <input type="text" id="subject" name="subject" required>
+      </div>
+      
+      <div class="form-group">
+        <label for="message">Message</label>
+        <textarea id="message" name="message" rows="5" required></textarea>
+      </div>
+      
+      <button type="submit" class="primary-btn">Send Message</button>
     </form>
   </section>
 
@@ -44,5 +80,7 @@
   </script>
   </div>
 
+  <script src="{% static 'scripts/contact.js' %}"></script>
 </body>
 </html>
+
